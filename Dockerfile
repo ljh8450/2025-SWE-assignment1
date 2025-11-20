@@ -7,13 +7,14 @@ RUN apt-get update && \
     build-essential \
     cmake \
     git \
+	wget \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /darknet
-RUN git clone https://github.com/pjreddie/darknet.git . \
-	&& sed -i 's/OPENCV=0/OPENCV=1/' Makefile \
-	&& make
+RUN apt install g++
 
+RUN git clone https://github.com/pjreddie/darknet.git
+WORKDIR /darknet
+RUN make
 RUN wget https://pjreddie.com/media/files/yolov3.weights
 
 COPY run_yolo.sh /run_yolo.sh
