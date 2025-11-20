@@ -1,9 +1,11 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && apt-get install -y \
-	build-essential git wget pkg-config \
-	libopencv-dev \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /darknet
 RUN git clone https://github.com/pjreddie/darknet.git . \
